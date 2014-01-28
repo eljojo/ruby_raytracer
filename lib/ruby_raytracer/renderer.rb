@@ -17,11 +17,20 @@ class Renderer
     png.save(opts[:filename], interlace: false)
   end
 
+  def image_width
+    opts[:width]
+  end
+
+  def image_height
+    opts[:height]
+  end
+
 private
   attr_reader :opts, :scene
 
   def trace(x, y)
-    ray = RubyRaytracer::Ray.new(Vector.new(x, y, 0), Vector.new(0, 0, 1))
+    plane_position = Vector.new(x, y, 0)
+    ray = RubyRaytracer::Ray.new(plane_position, plane_position - scene.camera.position)
 
     intersection_colors = scene.shapes.map do |shape|
       [shape.color, shape.intersection_with(ray)]
@@ -34,14 +43,6 @@ private
     else
       Color.black
     end
-  end
-
-  def image_width
-    opts[:width]
-  end
-
-  def image_height
-    opts[:height]
   end
 end
 end

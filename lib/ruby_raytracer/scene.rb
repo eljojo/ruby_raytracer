@@ -1,5 +1,5 @@
 module RubyRaytracer
-class Scene < Struct.new(:shapes)
+class Scene < Struct.new(:camera, :shapes)
 
 end
 end
