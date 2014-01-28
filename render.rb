@@ -12,4 +12,8 @@ scene = RubyRaytracer::Scene.new([
   Sphere.new(Vector.new(250.0, 250.0, 250.0), 150, Color.green)
 ])
 
+start = Time.now
 ray_tracer.render(scene)
+finish = Time.now
+
+puts "rendered in #{finish-start} seconds"
